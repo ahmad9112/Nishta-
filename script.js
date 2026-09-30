@@ -71,10 +71,13 @@ function closePopup() {
 }
 
 // Open popup every 5 minutes
-setInterval(() => {
-  openPopup();
-}, 5 * 1000);
-
+// Open popup only once
+if (!localStorage.getItem("admissionPopupShown")) {
+  setTimeout(() => {
+    openPopup();
+    localStorage.setItem("admissionPopupShown", "true");
+  }, 5000);
+}
 
 // WhatsApp Form
 document.getElementById("popupLeadForm").addEventListener("submit", function (e) {
