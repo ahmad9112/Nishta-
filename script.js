@@ -110,3 +110,87 @@ Please contact me regarding admission.`;
   closePopup();
 
 });
+
+
+//
+
+/* =========================
+   COURSE BANNER AUTO SLIDER
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".course-banner-slider");
+
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll(".banner-slide");
+  const prevBtn = slider.querySelector(".banner-prev");
+  const nextBtn = slider.querySelector(".banner-next");
+  const dotsContainer = slider.querySelector(".banner-dots");
+
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let autoSlide;
+
+  // Create navigation dots
+  slides.forEach((slide, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Go to banner ${index + 1}`);
+
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      restartAutoSlide();
+    });
+
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll("button");
+
+  function showSlide(index) {
+    slides[currentIndex].classList.remove("active");
+    dots[currentIndex].classList.remove("active");
+
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides[currentIndex].classList.add("active");
+    dots[currentIndex].classList.add("active");
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function startAutoSlide() {
+    autoSlide = setInterval(nextSlide, 4000);
+  }
+
+  function restartAutoSlide() {
+    clearInterval(autoSlide);
+    startAutoSlide();
+  }
+
+  nextBtn?.addEventListener("click", () => {
+    nextSlide();
+    restartAutoSlide();
+  });
+
+  prevBtn?.addEventListener("click", () => {
+    prevSlide();
+    restartAutoSlide();
+  });
+
+  // Initialize first banner
+  slides.forEach((slide, index) => {
+    slide.classList.toggle("active", index === 0);
+    dots[index].classList.toggle("active", index === 0);
+  });
+
+  startAutoSlide();
+});
