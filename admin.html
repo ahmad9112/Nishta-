@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Nishtha Institute</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+        }
+
+        header {
+            background: #173b70;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #dbeafe;
+        }
+
+        main {
+            max-width: 760px;
+            margin: 32px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: white;
+            padding: 26px;
+            margin-bottom: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 16px #0000000c;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        button {
+            border: 0;
+            border-radius: 7px;
+            padding: 12px 18px;
+            background: #1d4ed8;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .danger {
+            background: #b91c1c;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .status {
+            margin-top: 15px;
+            overflow-wrap: anywhere;
+            font-size: 14px;
+        }
+
+        .note {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .note h3 {
+            margin: 0 0 8px;
+        }
+
+        .note a {
+            color: #1d4ed8;
+        }
+
+        .note button {
+            margin-right: 8px;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Nishtha Institute</h1>
+        <p>Daily Notes — Admin Dashboard</p>
+    </header>
+
+    <main>
+        <section class="card" id="loginSection">
+            <h2>Admin Login</h2>
+
+            <form id="loginForm">
+                <label for="email">Admin Email</label>
+                <input id="email" type="email" autocomplete="username" required>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" required>
+
+                <button id="loginButton" type="submit">Login</button>
+            </form>
+
+            <p id="loginStatus" class="status" role="status"></p>
+        </section>
+
+        <section class="hidden" id="dashboard">
+            <div class="card">
+                <h2>Add Daily Notes</h2>
+
+                <p class="hint">
+                    Upload your PDF to Google Drive first. Set sharing to
+                    Anyone with the link — Viewer, then paste the PDF link below.
+                </p>
+
+                <form id="noteForm">
+                    <label for="title">Notes Title</label>
+                    <input id="title" type="text" placeholder="e.g. JEE Mathematics" maxlength="180" required>
+
+                    <label for="course">Course</label>
+                    <select id="course" required>
+                        <option value="Class 8th">Class 8th</option>
+                        <option value="Class 9th">Class 9th</option>
+                        <option value="Class 10th">Class 10th</option>
+                        <option value="Class 11th">Class 11th</option>
+                        <option value="Class 12th">Class 12th</option>
+                        <option value="IIT JEE" selected>IIT JEE</option>
+                    </select>
+
+                    <label for="subject">Subject</label>
+                    <input id="subject" type="text" placeholder="e.g. JEE Mathematics" maxlength="100" required>
+
+                    <label for="noteDate">Notes Date</label>
+                    <input id="noteDate" type="date" required>
+
+                    <label for="pdfUrl">Google Drive PDF Link</label>
+                    <input id="pdfUrl" type="url" placeholder="https://drive.google.com/..." required>
+
+                    <label>
+                        <input id="published" type="checkbox" checked style="display:inline;width:auto">
+                        Publish notes for students
+                    </label>
+
+                    <button id="saveButton" type="submit">Add Notes</button>
+                    <button id="cancelEdit" class="secondary hidden" type="button">
+                        Cancel Edit
+                    </button>
+                </form>
+
+                <p id="formStatus" class="status" role="status"></p>
+            </div>
+
+            <div class="card">
+                <h2>Manage Notes</h2>
+                <p class="hint">Edit or delete notes already added to the database.</p>
+                <div id="notesList">Loading notes...</div>
+            </div>
+
+            <button id="logoutButton" class="secondary" type="button">
+                Logout
+            </button>
+        </section>
+    </main>
+
+    <script type="module" src="./admin.js"></script>
+</body>
+
+</html>
