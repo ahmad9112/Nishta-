@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const course = document.getElementById("course").value;
     const msg = document.getElementById("message").value.trim();
     const text = `*Nishtha Institute - Admission Enquiry*%0A%0A*Student Name:* ${encodeURIComponent(name)}%0A*Parent/Guardian:* ${encodeURIComponent(parent)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Class/Status:* ${encodeURIComponent(cls)}%0A*Course:* ${encodeURIComponent(course)}%0A*Requirement:* ${encodeURIComponent(msg || "Not specified")}%0A%0APlease contact me regarding admission.`;
-    window.open(`https://wa.me/916393279543?text=${text}`, "_blank", "noopener");
+    window.open(`https://wa.me/916387375048?text=${text}`, "_blank", "noopener");
   });
 
   document.getElementById("year").textContent = new Date().getFullYear();
